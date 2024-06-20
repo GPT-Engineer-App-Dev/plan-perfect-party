@@ -11,6 +11,7 @@ const Index = () => {
         <Text>Welcome to the Event Management Platform. Create and manage your events effortlessly.</Text>
         <Button colorScheme="teal" size="lg" onClick={() => navigate('/create-event')}>Create New Event</Button>
         <Button colorScheme="teal" size="lg" onClick={() => navigate('/event-list')}>View Events</Button>
+        <Button colorScheme="teal" size="lg" onClick={() => navigate('/ticket-booking')}>Book Tickets</Button>
       </VStack>
     </Container>
   );
