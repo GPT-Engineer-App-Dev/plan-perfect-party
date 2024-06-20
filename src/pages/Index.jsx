@@ -10,6 +10,7 @@ const Index = () => {
         <Heading as="h1" size="2xl">Event Management Platform</Heading>
         <Text>Welcome to the Event Management Platform. Create and manage your events effortlessly.</Text>
         <Button colorScheme="teal" size="lg" onClick={() => navigate('/create-event')}>Create New Event</Button>
+        <Button colorScheme="teal" size="lg" onClick={() => navigate('/event-list')}>View Events</Button>
       </VStack>
     </Container>
   );

@@ -1,4 +1,4 @@
-import { Container, VStack, Heading, FormControl, FormLabel, Input, Button, Textarea } from "@chakra-ui/react";
+import { Container, VStack, Heading, FormControl, FormLabel, Input, Button, Textarea, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 
 const CreateEvent = () => {
@@ -6,10 +6,44 @@ const CreateEvent = () => {
   const [eventDate, setEventDate] = useState("");
   const [eventDescription, setEventDescription] = useState("");
 
-  const handleSubmit = (e) => {
+  const toast = useToast();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle event creation logic here
-    console.log("Event Created:", { eventName, eventDate, eventDescription });
+    const eventDetails = { eventName, eventDate, eventDescription };
+
+    try {
+      const response = await fetch('/api/events', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(eventDetails),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Event created.",
+          description: "Your event has been created successfully.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        setEventName("");
+        setEventDate("");
+        setEventDescription("");
+      } else {
+        throw new Error('Failed to create event');
+      }
+    } catch (error) {
+      toast({
+        title: "An error occurred.",
+        description: "Unable to create event.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
